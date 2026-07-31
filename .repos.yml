@@ -1,0 +1,41 @@
+# Fiskroad member repositories.
+# Consumed by tools/bootstrap.sh; also the canonical list of what the
+# program contains and who owns each part.
+
+program: fiskroad
+
+repos:
+  - name: hometown
+    url: git@github.com:oscarmackjr-twg/hometown.git   # confirm before first use
+    branch: main
+    role: Semantic layer, provenance, governed access (EKG)
+    owner: hometown team
+    visibility: private
+
+  - name: popeye
+    url: git@github.com:oscarmackjr-twg/popeye.git  # confirm before first use
+    branch: main
+    role: AI usage governance control plane and infrastructure
+    owner: popeye team
+    visibility: private
+
+  - name: bluto
+    url: git@github.com:oscarmackjr-twg/bluto.git  # confirm before first use
+    branch: main
+    role: Enterprise identity spine - cross-system entity resolution
+    owner: bluto team
+    visibility: private
+
+  - name: nono
+    url: https://github.com/OscarMackJr/nono.git
+    branch: main
+    role: Windows-native endpoint sandboxing and bypass detection
+    owner: nono maintainers
+    visibility: public
+
+  - name: zt-infra-full
+    url: https://github.com/oscarmackjr-twg/zt-infra-full.git
+    branch: main
+    role: Zero-trust agent identity and secure transport
+    owner: zt-infra maintainers
+    visibility: public

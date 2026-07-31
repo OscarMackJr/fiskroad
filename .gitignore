@@ -1,0 +1,5 @@
+# Member repositories are cloned here, never committed.
+workspace/
+
+.DS_Store
+node_modules/
