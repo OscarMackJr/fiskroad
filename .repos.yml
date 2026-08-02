@@ -5,26 +5,41 @@
 program: fiskroad
 
 repos:
+  - name: fiskroad
+    url: git@github.com:oscarmackjr-twg/fiskroad.git  # pending publication (M1)
+    branch: main
+    role: Program coordination, specifications, and shared contracts
+    owner: program maintainers
+    visibility: private
+    roadmap: specs/PROGRAM_ROADMAP_REQUIREMENTS_v0.1.md
+    state: STATE.md
+
   - name: hometown
-    url: git@github.com:oscarmackjr-twg/hometown.git   # confirm before first use
+    url: git@github.com:OscarMackJr/hometown.git
     branch: main
     role: Semantic layer, provenance, governed access (EKG)
     owner: hometown team
     visibility: private
+    roadmap: specs/ROADMAP.md
+    state: specs/STATE.md
 
   - name: popeye
-    url: git@github.com:oscarmackjr-twg/popeye.git  # confirm before first use
+    url: git@github.com:OscarMackJr/popeye.git
     branch: main
     role: AI usage governance control plane and infrastructure
     owner: popeye team
     visibility: private
+    roadmap: specs/ROADMAP.md  # rename pending (popeye v0.3 P-5)
+    state: specs/STATE.md
 
   - name: bluto
-    url: git@github.com:oscarmackjr-twg/bluto.git  # confirm before first use
+    url: git@github.com:OscarMackJr/bluto.git
     branch: main
     role: Enterprise identity spine - cross-system entity resolution
     owner: bluto team
     visibility: private
+    roadmap: specs/ROADMAP.md
+    state: specs/STATE.md
 
   - name: nono
     url: https://github.com/OscarMackJr/nono.git
@@ -32,6 +47,8 @@ repos:
     role: Windows-native endpoint sandboxing and bypass detection
     owner: nono maintainers
     visibility: public
+    roadmap: .planning/ROADMAP.md
+    state: .planning/STATE.md
 
   - name: zt-infra-full
     url: https://github.com/oscarmackjr-twg/zt-infra-full.git
@@ -39,3 +56,5 @@ repos:
     role: Zero-trust agent identity and secure transport
     owner: zt-infra maintainers
     visibility: public
+    roadmap: docs/ROADMAP.md
+    state: docs/STATE.md

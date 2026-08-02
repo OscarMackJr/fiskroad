@@ -1,7 +1,7 @@
 # Fiskroad Program State
 
 Status: Active
-Last updated: 2026-07-28
+Last updated: 2026-08-02
 Audience: program maintainers, project leads, future implementation agents
 Primary post-read action: know the program's current position and which project repository holds the next engineering task.
 
@@ -55,9 +55,14 @@ Project positions in one line each:
   time and recorded, never inferred at query time.
 - Unstructured retrieval is explicitly out of scope for the MVP; if
   required it is a new component (POC F), not an extension of hometown.
-- Document conventions: one `specs/ROADMAP.md` and one state file per
-  project. Consolidated 2026-07-28; the `ROADMAP_integration_*` split is
-  retired.
+- Document conventions: chartered projects use `specs/ROADMAP.md` and
+  `specs/STATE.md`; pre-existing members retain their native layouts,
+  and `.repos.yml` records each project's roadmap and state paths.
+- v0.3 correction set: shared vocabulary ratified; `tenant_id` is a
+  lowercase canonical UUID; the five-class taxonomy is unified; and
+  `regulated-identifier` is structurally unapprovable.
+- Cross-repository findings X1 and X2 are closed at the program level;
+  downstream conformance remains pending in popeye and hometown.
 - ADR-002 (popeye): gateway config is Terraform-rendered non-secret YAML
   delivered as a Container Apps secret and written to disk at startup —
   chosen over a config-baked image to get auditable revision rollback

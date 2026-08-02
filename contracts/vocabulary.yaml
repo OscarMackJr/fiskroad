@@ -1,0 +1,31 @@
+# Fiskroad program shared vocabulary — machine-readable form.
+# Owning spec: fiskroad/specs/PROGRAM_SHARED_VOCABULARY_v0.3.md
+# This file is the comparison target for cross-repo conformance checks.
+# Consuming repos vendor it unchanged and record its SHA-256.
+version: 0.3
+
+data_classes:
+  # Ordered least -> most restricted. Exact strings; no synonyms.
+  - public
+  - internal
+  - confidential-personal
+  - regulated-financial
+  - regulated-identifier
+
+# Classes no model may declare as approved_max_data_class.
+unapprovable:
+  - regulated-identifier
+
+# Lowercase canonical UUID (8-4-4-4-12). Applies to every stored, logged,
+# or transmitted tenant_id in the program, including gateway metadata.
+tenant_id_format: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+
+# POC tenants. Minted once, 2026-08-02; permanent. Display names are
+# labels only and never travel as identifiers.
+poc_tenants:
+  - display_name: TENANT_ALPHA
+    tenant_id: 5325ffe9-5727-4d88-9832-aebabb8d0538
+  - display_name: TENANT_BETA
+    tenant_id: f92c9dba-50f1-4cad-9690-5d79f8ded335
+  - display_name: TENANT_GAMMA
+    tenant_id: 8d61d9c2-e603-439b-8322-996c3099d503

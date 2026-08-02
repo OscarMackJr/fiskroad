@@ -41,7 +41,16 @@ time. This is the decoder; keep it current.
 - **Party / party_id** — a resolved enterprise entity and its stable
   identifier, owned by Bluto. Never reused, including after merge.
 - **Data class** — the sensitivity classification carried by a feature
-  tag and by an approved model; popeye enforces the intersection.
+  tag and by an approved model; popeye enforces the intersection. The
+  five classes, from least to most restricted, are `public`, `internal`,
+  `confidential-personal`, `regulated-financial`, and
+  `regulated-identifier`.
+- **Shared vocabulary / `vocabulary.yaml`** — the program-owned,
+  machine-readable shared contract in `contracts/vocabulary.yaml` for
+  the canonical tenant identifier, data-class taxonomy, the
+  unapprovable class, and fixed POC tenant identifiers.
+- **Canonical `tenant_id`** — a lowercase canonical UUID (8-4-4-4-12)
+  used unchanged in every store, header, event, trace, and seed record.
 - **Degradation mode** — per-feature declaration of behaviour when
   governed context is unavailable: `fail_closed` or
   `degrade_with_disclosure`.
@@ -65,11 +74,13 @@ time. This is the decoder; keep it current.
 - Repositories are named by codename alone: `hometown`, `popeye`,
   `nono`, `zt-infra-full`. There is no `-infra` suffix; earlier drafts
   used `popeye-infra` and `ai-gateway-infra`, both retired.
-- Every project's team roadmap is `specs/ROADMAP.md` and its state file
-  is `specs/STATE.md` (popeye's state file sits at the repo root). The
-  `ROADMAP_integration_*` filenames were merge-process artifacts and are
-  retired; both roadmaps are consolidated single files as of
-  2026-07-28.
+- Projects chartered under Fiskroad use `specs/ROADMAP.md` and
+  `specs/STATE.md`. Member projects that predate the program retain
+  their native layouts (`.planning/` for nono and `docs/` for
+  zt-infra-full); `.repos.yml` records each project's roadmap and state
+  paths. The `ROADMAP_integration_*` filenames were merge-process
+  artifacts and are retired where the chartered-project convention has
+  been adopted.
 
 ## Stage Numbers Are Per-Project
 
