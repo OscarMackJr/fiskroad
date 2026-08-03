@@ -34,7 +34,7 @@ repos:
 
   - name: bluto
     url: git@github.com:OscarMackJr/bluto.git
-    branch: main
+    branch: implementation/bootstrap
     role: Enterprise identity spine - cross-system entity resolution
     owner: bluto team
     visibility: private
