@@ -15,10 +15,9 @@ branches=($(grep -E '^\s+branch:' "$ROOT/.repos.yml" | sed 's/.*branch: *//'))
 
 for i in "${!names[@]}"; do
   name="${names[$i]}"; url="${urls[$i]}"; branch="${branches[$i]}"
-  # M1: this checkout is Fiskroad; skip its manifest entry until the
-  # coordination repository is published and can be cloned remotely.
+  # This checkout is Fiskroad; don't clone it into its own workspace.
   if [ "$name" = "fiskroad" ]; then
-    echo "== $name: skipping (pending publication M1)"
+    echo "== $name: skipping (this checkout)"
     continue
   fi
   target="$WS/$name"

@@ -6,7 +6,7 @@ program: fiskroad
 
 repos:
   - name: fiskroad
-    url: git@github.com:oscarmackjr-twg/fiskroad.git  # pending publication (M1)
+    url: git@github.com:OscarMackJr/fiskroad.git
     branch: main
     role: Program coordination, specifications, and shared contracts
     owner: program maintainers
