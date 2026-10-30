@@ -124,10 +124,10 @@ POC A.
 
 | Contract | Canonical path | State |
 | --- | --- | --- |
-| Nono ↔ Popeye Session Credential Contract | `contracts/NONO_POPEYE_SESSION_CREDENTIAL_CONTRACT_v0.1.md` | v0.1 draft — awaiting joint review; D-1 issuer identity open |
+| Nono ↔ Popeye Session Credential Contract | `contracts/NONO_POPEYE_SESSION_CREDENTIAL_CONTRACT_v0.2.md` | v0.2 draft — aligned to the ratified v0.4.1–v0.4.3 package; awaiting maintainer confirmation |
 
 ## 3. Cross-Repo Work in Flight
 
 | Work | Repositories | Gate |
 | --- | --- | --- |
-| Nono ↔ Popeye session credential contract joint review | popeye (issuer side), nono (consumer side), program lead | Joint review by nono and popeye maintainers and the program lead before either side implements |
+| Nono ↔ Popeye session credential contract confirmation | popeye (issuer side), nono (consumer side), program lead | nono and popeye maintainers confirm v0.2 restates the ratified v0.4.1–v0.4.3 specs without drift; implementation follows the ratified specs |
