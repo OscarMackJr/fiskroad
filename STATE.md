@@ -101,6 +101,24 @@ These hold across every repository and are the reason Fiskroad exists:
 Any change touching more than one of these needs review in both affected
 repositories before it lands in either.
 
+## Invariant Exceptions On Record
+
+**Invariant 4, agent answers only** — ratified 2026-10-20 by Oscar Mack
+(architecture and risk decisions). Recorded in full in hometown
+`specs/HOMETOWN_v0.4.md` §2.5 (hometown PR #17).
+
+For an answer whose `policy.principalType` is `agent`, hometown saves
+the trace before the answer or its trace ID is returned. If the save
+fails, the answer is withheld. The reason: an agent must never hold a
+`trace_ref` that does not resolve. Otherwise olive cannot verify agent
+proposals against hometown's trace resolution endpoint.
+
+The exception covers nothing else. User and application answers keep
+non-blocking trace writes, and the ledger, monitoring and every other
+observation component remain bound by invariant 4 (hometown
+REQ/TC-PROV-26 guards the boundary). Widening the scope needs a new
+ratification recorded here.
+
 ## Sequence Deviation On Record
 
 The plan of record gated Popeye Stage 2's apply on the Stage 1 baseline
