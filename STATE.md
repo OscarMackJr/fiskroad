@@ -137,3 +137,15 @@ ledger row, then the Stage 1 measurement runs and
 `specs/STAGE1_BASELINES.md`. That document remains the gate for
 committing SLOs, replacing placeholder alert criteria, and chartering
 POC A.
+
+## 2. Shared Contracts
+
+| Contract | Canonical path | State |
+| --- | --- | --- |
+| Nono ↔ Popeye Session Credential Contract | `contracts/NONO_POPEYE_SESSION_CREDENTIAL_CONTRACT_v0.2.md` | v0.2 draft — aligned to the ratified v0.4.1–v0.4.3 package; awaiting maintainer confirmation |
+
+## 3. Cross-Repo Work in Flight
+
+| Work | Repositories | Gate |
+| --- | --- | --- |
+| Nono ↔ Popeye session credential contract confirmation | popeye (issuer side), nono (consumer side), program lead | nono and popeye maintainers confirm v0.2 restates the ratified v0.4.1–v0.4.3 specs without drift; implementation follows the ratified specs |
