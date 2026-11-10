@@ -40,7 +40,7 @@
   - a nono amendment adding sit-cip and Nexus to the injectable FQDNs, and
   - a popeye amendment adding them as registered introspection callers,
 
-  followed by re-ratification of `DECISION_agent-key-service-scope`. None of these are written yet.
+  followed by re-ratification of `DECISION_agent-key-service-scope`. **Done 2026-11-10:** `NONO_v0.4.4.md` and `POPEYE_v0.4.4.md` were ratified jointly by `DECISION_agent-key-service-scope` Revision 2.
 - sit-cip's `TinesHandoffEvent` becomes an olive proposal with `target_system: "tines"`, carrying `on_behalf_of` and `task_id`.
 - **Residual:** the key reaches two more services. That is mitigated by short TTL, reads-only policy, and introspection conferring no capability, the same mitigations as the original scope decision.
 
@@ -59,5 +59,5 @@
 | Date | 2026-11-10 |
 | Ratified by | Oscar Mack, program lead (architecture and risk decisions) |
 | Session | Access-control decisions session, 2026-11-10. Recommendation accepted as written. |
-| Not ratified here | The nono and popeye amendments, and re-ratification of `DECISION_agent-key-service-scope` (§4) |
+| Follow-up ratified | `NONO_v0.4.4.md` and `POPEYE_v0.4.4.md`, via `DECISION_agent-key-service-scope` Revision 2, 2026-11-10 (§4) |
 | Residual risk accepted | Wider key exposure, limited to reads (§4) |
