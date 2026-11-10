@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **Ratified 2026-10-19** — ratifies `NONO_v0.4.2.md` and `POPEYE_v0.4.2.md` together (see Ratification Record) |
+| Status | **Ratified 2026-10-19** — ratifies `NONO_v0.4.2.md` and `POPEYE_v0.4.2.md` together (see Ratification Record). **Revision 2 proposed 2026-11-10, pending re-ratification** (see the end of this record) |
 | Date | 2026-10-19 |
 | Owner | Oscar Mack (architecture and risk decisions) |
 | Components affected | nono (fork), popeye, hometown, olive, Liam (tests only) |
@@ -116,3 +116,39 @@ Accepting this decision ratifies `NONO_v0.4.2` and `POPEYE_v0.4.2` together, und
 | Not ratified here | §6 items: olive charter conformance to the one-line olive requirement; hometown's agent answer endpoint contract (S-HT-1); ATE gap G6; registered caller and relay list location (`POPEYE_v0.4.1` §5 O3) |
 | Residual risk accepted | A compromised hometown could misuse a live session key within its TTL; keys minted with `direct_gateway=true` remain replayable by a holder until expiry or revocation (§5) |
 | Change control | Any change to injection scope, introspection, relay rules or `direct_gateway` semantics requires matching changes to both amendments and re-ratification of this decision |
+
+---
+
+## Revision 2 (proposed 2026-11-10, pending re-ratification)
+
+**What changes.** Two decisions ratified on 2026-11-10 change this record's scope. Under the change-control clause above, they need matching amendments and re-ratification:
+
+- **Injection scope (D-4, `DECISION_agent-key-sitcip-nexus-reads.md`).**
+  - `inject_on` may also name `sitcip` and `nexus`, for reads only.
+  - sit-cip and Nexus become registered introspection callers, not relays.
+  - Agent writes go through olive action types.
+- **Task binding (D-3, `DECISION_task-binding-on-agent-key.md`).**
+  - Every agent key carries `task_id`, `task_type` and `task_expires_at`.
+  - Introspection returns them, and a key whose task is no longer open introspects as inactive.
+  - Closing a task ends every key bound to it.
+
+**Amendments proposed for joint ratification.**
+
+- `NONO_v0.4.4.md`: task binding at launch, new permitted services, and `AgentSessionRecord` v2.
+- `POPEYE_v0.4.4.md`: task binding at mint, the agent registry, task close, and introspection callers.
+
+**Effect on this record.**
+
+- §2 gains sit-cip and Nexus as injection destinations, for reads.
+- §7's trigger "a fourth service needing agent identity" is exercised by D-4.
+- This record's open item, the registered caller and relay list location (`POPEYE_v0.4.1` §5 O3), is closed by D-3: the agent registry lives in popeye (`POPEYE_v0.4.4` §3).
+
+**Residual risk to accept at re-ratification.** A compromised sit-cip or Nexus could misuse a live key within its TTL. The misuse is limited to reads its policy permits, and is ended early by task close (`POPEYE_v0.4.4` §6).
+
+| Field | Value |
+|---|---|
+| Revision | 2 |
+| Proposed | 2026-11-10 |
+| Status | **Pending re-ratification** |
+| Ratified by | — (program lead) |
+| Ratifies, when accepted | `NONO_v0.4.4.md` and `POPEYE_v0.4.4.md`, jointly |
