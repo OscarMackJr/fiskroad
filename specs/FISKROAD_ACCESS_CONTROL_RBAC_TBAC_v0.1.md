@@ -1,11 +1,11 @@
 # Access Control Across nono, sit-cip and Nexus: RBAC + TBAC — Recommendation v0.1
 
 Version: 0.1
-Status: Recommendation — proposes decisions; ratifies none. Its prerequisite fixes (§5 Phase 0) are merged; it asks for the decisions in §9.
+Status: **Decisions ratified 2026-11-10.** All six §9 recommendations were accepted, and each is recorded in `specs/decisions/`. The prerequisite fixes (§5 Phase 0) are merged apart from denial logging. `contracts/authz/` and vocabulary v0.5 implement D-1 and D-2.
 Date: 2026-11-10
 Audience: program lead; nono, sit-cip, Nexus and popeye maintainers; olive charter owner
 Relationship: triggers the deferred policy-engine decision in `COMPONENT_GAP_ASSESSMENT_v0.1` §3C; builds on `POPEYE_v0.4.1` §2.2 (agent keys), `PROGRAM_SHARED_VOCABULARY_v0.4` §2–§4, `OLIVE_CHARTER_v0.4` §2–§5, `DECISION_agent-key-service-scope`, and `FISKROAD_MCP_GOVERNANCE_CONVERGENCE_v0.1`.
-Primary post-read action: take §9 to one session with the nono, sit-cip, Nexus and popeye owners. Phase 0 (§5) is done apart from denial logging.
+Primary post-read action: start Phase 1 (§5). The follow-ups named in the D-3 and D-4 decision records are the popeye amendment for task claims and the nono and popeye amendments for the wider injection scope.
 
 ---
 
@@ -96,7 +96,7 @@ The conclusion is that nono already implements TBAC for its own sessions. sit-ci
   - It is a CNCF Sandbox project.
 - **Why not OPA.** OPA is the more mature general engine. But it is a weak fit for embedding in Rust (it needs a sidecar or Wasm), and Rego is harder to review. Revisit if the program adopts Kubernetes admission control.
 - **Why not OpenFGA (Zanzibar-style relationship authorization) now.** Nexus's record rules (team, owner, private, oversight) fit in roughly a dozen Cedar policies over entity attributes. Adopt OpenFGA only if Nexus gains real many-to-many sharing (revisit trigger R-3).
-- **Where policies live.** Put the shared schema and policies in `fiskroad/contracts/authz/`: `schema.cedarschema`, `policies/<system>/*.cedar` and `fixtures/*.json`.
+- **Where policies live.** The shared schema and policies are in `fiskroad/contracts/authz/`: `schema.cedarschema`, `policies/<system>/*.cedar`, `fixtures/*.json`, `roles.yaml` and `task_types.yaml`. They are checked by `tools/authz_check.py`.
   - Each system pins a version, the same pattern as `contracts/vocabulary.yaml`.
   - CI runs `cedar validate`, plus golden allow/deny fixtures for every role × task_type × data class.
   - Changing a policy is a contract change, reviewed in the policy repository and the affected system's repository.
@@ -157,16 +157,18 @@ The conclusion is that nono already implements TBAC for its own sessions. sit-ci
 - **Capabilities inside tokens.** Tokens carry identity and task binding, and policy decides.
 - **Per-service agent keys.** They stay rejected, per `DECISION_agent-key-service-scope` §3.2.
 
-## 9. Open Decisions
+## 9. Decisions
 
-| ID | Decision | Recommendation | Owner |
-|---|---|---|---|
-| D-1 | Adopt Cedar as the program policy engine (closes the §3C deferral) | Adopt | Program lead |
-| D-2 | Add `task`, `task_id` and `task_type` to the shared vocabulary (a two-team contract change) | Adopt for v0.5 of the vocabulary | Program lead + popeye |
-| D-3 | popeye adds the task claims to agent keys. This closes POPEYE_v0.4.1 O3 by putting the registry in popeye, per proposal R2. | Adopt; set `task_type` from a registered list | popeye |
-| D-4 | Extend `inject_on` to sit-cip and Nexus | Adopt for reads only; writes go through olive | Program lead |
-| D-5 | Use Entra as Nexus's identity provider, although Nexus runs on AWS | Adopt | Nexus |
-| D-6 | Name the Entra groups for every §4.1 role, including the open `role:case_supervisor` and `role:identity_steward` | Name them in Phase 1 | Program lead |
+All six recommendations were accepted at the access-control decisions session on 2026-11-10 with the nono, sit-cip, Nexus and popeye owners, and ratified by the program lead. Each has a decision record in `specs/decisions/`.
+
+| ID | Decision | Outcome | Owner | Record |
+|---|---|---|---|---|
+| D-1 | Adopt Cedar as the program policy engine (closes the §3C deferral) | **Adopted**: Cedar, embedded, one shared policy repository (`contracts/authz/`) | Program lead | `DECISION_policy-engine-cedar.md` |
+| D-2 | Add `task`, `task_id` and `task_type` to the shared vocabulary (a two-team contract change) | **Adopted** as vocabulary v0.5 | Program lead + popeye | `DECISION_task-vocabulary.md` |
+| D-3 | popeye adds the task claims to agent keys. This closes POPEYE_v0.4.1 O3 by putting the registry in popeye, per proposal R2. | **Adopted**; `task_type` comes from a registered list (`contracts/authz/task_types.yaml`) | popeye | `DECISION_task-binding-on-agent-key.md` |
+| D-4 | Extend `inject_on` to sit-cip and Nexus | **Adopted** for reads only; writes go through olive. The nono and popeye amendments and re-ratification of `DECISION_agent-key-service-scope` follow. | Program lead | `DECISION_agent-key-sitcip-nexus-reads.md` |
+| D-5 | Use Entra as Nexus's identity provider, although Nexus runs on AWS | **Adopted** | Nexus | `DECISION_nexus-identity-provider-entra.md` |
+| D-6 | Name the Entra groups for every §4.1 role, including the open `role:case_supervisor` and `role:identity_steward` | **Adopted**: named in Phase 1 | Program lead | `DECISION_entra-group-naming.md` |
 
 **Revisit triggers:**
 - **R-1:** more than about 5 systems evaluate policy, or policies need data that no single system holds. Then consider a central decision service.
