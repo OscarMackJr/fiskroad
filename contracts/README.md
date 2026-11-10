@@ -2,10 +2,13 @@
 
 ## What's here now
 
-- `vocabulary.yaml` — the machine-readable shared vocabulary (v0.4). Its
-  owning spec is `specs/PROGRAM_SHARED_VOCABULARY_v0.4.md`. Consuming
+- `vocabulary.yaml` — the machine-readable shared vocabulary (v0.5). Its
+  owning spec is `specs/PROGRAM_SHARED_VOCABULARY_v0.5.md`. Consuming
   repositories vendor it unchanged and record its SHA-256; it is the
   comparison target for cross-repo conformance checks.
+- `authz/` — the shared Cedar authorization contract (schema, policies, role
+  catalogue, task types, fixtures) evaluated in-process by nono, sit-cip and
+  Nexus. See `authz/README.md`; checked by `tools/authz_check.py`.
 
 ## Reserved: the shared schemas package
 

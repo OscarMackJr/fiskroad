@@ -1,0 +1,44 @@
+{
+  "description": "nono: fleet administration roles and agent capability requests inside a coding session",
+  "entities": [
+    {"uid": {"type": "Fiskroad::Role", "id": "nono_policy_admin"}, "attrs": {}, "parents": []},
+    {"uid": {"type": "Fiskroad::Role", "id": "nono_override_approver"}, "attrs": {}, "parents": []},
+    {"uid": {"type": "Fiskroad::Role", "id": "nono_operator"}, "attrs": {}, "parents": []},
+    {"uid": {"type": "Fiskroad::Role", "id": "agent_nono_coder"}, "attrs": {}, "parents": []},
+
+    {"uid": {"type": "Fiskroad::User", "id": "pia.policyadmin"}, "attrs": {"tenants": [], "teams": []},
+     "parents": [{"type": "Fiskroad::Role", "id": "nono_policy_admin"}]},
+    {"uid": {"type": "Fiskroad::User", "id": "abe.approver"}, "attrs": {"tenants": [], "teams": []},
+     "parents": [{"type": "Fiskroad::Role", "id": "nono_override_approver"}]},
+    {"uid": {"type": "Fiskroad::User", "id": "dev.operator"}, "attrs": {"tenants": [], "teams": []},
+     "parents": [{"type": "Fiskroad::Role", "id": "nono_operator"}]},
+    {"uid": {"type": "Fiskroad::User", "id": "vic.visitor"}, "attrs": {"tenants": [], "teams": []}, "parents": []},
+
+    {"uid": {"type": "Fiskroad::Agent", "id": "coder-for-dev"},
+     "attrs": {"agent_id": "claude-code", "on_behalf_of": {"__entity": {"type": "Fiskroad::User", "id": "dev.operator"}}},
+     "parents": [{"type": "Fiskroad::Role", "id": "agent_nono_coder"}]},
+    {"uid": {"type": "Fiskroad::Agent", "id": "coder-for-visitor"},
+     "attrs": {"agent_id": "claude-code", "on_behalf_of": {"__entity": {"type": "Fiskroad::User", "id": "vic.visitor"}}},
+     "parents": [{"type": "Fiskroad::Role", "id": "agent_nono_coder"}]},
+
+    {"uid": {"type": "Fiskroad::NonoCapability", "id": "workdir-write"}, "attrs": {"kind": "fs_write", "data_class": "internal"}, "parents": []},
+    {"uid": {"type": "Fiskroad::NonoCapability", "id": "repo-read"}, "attrs": {"kind": "fs_read", "data_class": "internal"}, "parents": []},
+    {"uid": {"type": "Fiskroad::NonoCapability", "id": "egress-pypi"}, "attrs": {"kind": "net_egress", "data_class": "public"}, "parents": []},
+    {"uid": {"type": "Fiskroad::NonoProfile", "id": "fleet-default"}, "attrs": {}, "parents": []}
+  ],
+  "cases": [
+    {"name": "policy admin authors a fleet profile", "principal": ["User", "pia.policyadmin"], "action": "nono.profile.author", "resource": ["NonoProfile", "fleet-default"], "expect": "Allow"},
+    {"name": "operator cannot author fleet policy", "principal": ["User", "dev.operator"], "action": "nono.profile.author", "resource": ["NonoProfile", "fleet-default"], "expect": "Deny"},
+    {"name": "approver approves an override", "principal": ["User", "abe.approver"], "action": "nono.override.approve", "resource": ["NonoCapability", "workdir-write"], "expect": "Allow"},
+
+    {"name": "agent gets workdir write inside a coding session", "principal": ["Agent", "coder-for-dev"], "action": "nono.capability.request", "resource": ["NonoCapability", "workdir-write"],
+     "context": {"task": {"task_id": "5f4e3d2c-1b0a-4987-8654-3210fedcba98", "task_type": "nono.coding_session"}}, "expect": "Allow"},
+    {"name": "network egress is never auto-granted (escalates)", "principal": ["Agent", "coder-for-dev"], "action": "nono.capability.request", "resource": ["NonoCapability", "egress-pypi"],
+     "context": {"task": {"task_id": "5f4e3d2c-1b0a-4987-8654-3210fedcba98", "task_type": "nono.coding_session"}}, "expect": "Deny"},
+    {"name": "agent cannot exceed a user without nono_operator (REQ-AC-03)", "principal": ["Agent", "coder-for-visitor"], "action": "nono.capability.request", "resource": ["NonoCapability", "repo-read"],
+     "context": {"task": {"task_id": "5f4e3d2c-1b0a-4987-8654-3210fedcba98", "task_type": "nono.coding_session"}}, "expect": "Deny"},
+    {"name": "agent never approves overrides", "principal": ["Agent", "coder-for-dev"], "action": "nono.override.approve", "resource": ["NonoCapability", "workdir-write"],
+     "context": {"task": {"task_id": "5f4e3d2c-1b0a-4987-8654-3210fedcba98", "task_type": "nono.coding_session"}}, "expect": "Deny"},
+    {"name": "agent outside a session is denied", "principal": ["Agent", "coder-for-dev"], "action": "nono.capability.request", "resource": ["NonoCapability", "repo-read"], "expect": "Deny"}
+  ]
+}
