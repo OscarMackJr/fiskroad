@@ -1,7 +1,7 @@
 # Nono v0.4.4 — Task Binding at Launch, and sit-cip / Nexus Injection
 
 Version: 0.4.4
-Status: **Proposed 2026-11-10. Not ratified.** It ratifies jointly with `POPEYE_v0.4.4.md` (one seam) through the re-ratification of `DECISION_agent-key-service-scope.md` (proposed Revision 2). It implements decisions D-3 (`DECISION_task-binding-on-agent-key.md`) and D-4 (`DECISION_agent-key-sitcip-nexus-reads.md`), both ratified 2026-11-10.
+Status: **Ratified 2026-11-10**, jointly with `POPEYE_v0.4.4.md` (one seam), via `DECISION_agent-key-service-scope.md` Revision 2. It implements decisions D-3 (`DECISION_task-binding-on-agent-key.md`) and D-4 (`DECISION_agent-key-sitcip-nexus-reads.md`). See the Ratification Record at the end.
 Repository: nono (fork `OscarMackJr/nono`; place beside `NONO_v0.4.3.md`)
 Amends:
 - `NONO_v0.4.1.md` §4.1 (exchange request);
@@ -10,7 +10,7 @@ Amends:
 
 Adds REQ-END-26 to -31. All other parts of v0.4.1 to v0.4.3 stand.
 Audience: nono maintainer; popeye, sit-cip and Nexus owners.
-Primary post-read action: review with the popeye owner alongside `POPEYE_v0.4.4.md`, then take both to re-ratification.
+Primary post-read action: implement; the requirements in this amendment are the acceptance criteria.
 
 ---
 
@@ -118,8 +118,9 @@ Shared with `POPEYE_v0.4.4` §6. The key may now reach up to five services, each
 
 | Field | Value |
 |---|---|
-| Decision | **Pending.** Proposed for joint ratification with `POPEYE_v0.4.4.md` |
-| Date | — |
-| Ratified by | — (program lead, via re-ratification of `DECISION_agent-key-service-scope.md`) |
+| Decision | **Ratified**, jointly with `POPEYE_v0.4.4.md` as one seam |
+| Date | 2026-11-10 |
+| Ratified by | Oscar Mack, program lead (architecture and risk decisions), via re-ratification of `DECISION_agent-key-service-scope.md` Revision 2 |
+| Reviewed by | popeye and nono owners (approved, fiskroad PR #7) |
 | Implements | `DECISION_task-binding-on-agent-key.md` (D-3) and `DECISION_agent-key-sitcip-nexus-reads.md` (D-4), ratified 2026-11-10 |
-| Change control | On ratification, any change requires a matching change to `POPEYE_v0.4.4.md` and re-ratification of `DECISION_agent-key-service-scope.md` |
+| Change control | Any change requires a matching change to `POPEYE_v0.4.4.md` and re-ratification of `DECISION_agent-key-service-scope.md` |

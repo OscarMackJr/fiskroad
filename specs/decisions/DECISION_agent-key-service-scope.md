@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **Ratified 2026-10-19** — ratifies `NONO_v0.4.2.md` and `POPEYE_v0.4.2.md` together (see Ratification Record). **Revision 2 proposed 2026-11-10, pending re-ratification** (see the end of this record) |
+| Status | **Ratified 2026-10-19** — ratifies `NONO_v0.4.2.md` and `POPEYE_v0.4.2.md` together (see Ratification Record). **Revision 2 re-ratified 2026-11-10**, ratifying `NONO_v0.4.4.md` and `POPEYE_v0.4.4.md` together (see the end of this record) |
 | Date | 2026-10-19 |
 | Owner | Oscar Mack (architecture and risk decisions) |
 | Components affected | nono (fork), popeye, hometown, olive, Liam (tests only) |
@@ -119,7 +119,7 @@ Accepting this decision ratifies `NONO_v0.4.2` and `POPEYE_v0.4.2` together, und
 
 ---
 
-## Revision 2 (proposed 2026-11-10, pending re-ratification)
+## Revision 2 (re-ratified 2026-11-10)
 
 **What changes.** Two decisions ratified on 2026-11-10 change this record's scope. Under the change-control clause above, they need matching amendments and re-ratification:
 
@@ -149,6 +149,9 @@ Accepting this decision ratifies `NONO_v0.4.2` and `POPEYE_v0.4.2` together, und
 |---|---|
 | Revision | 2 |
 | Proposed | 2026-11-10 |
-| Status | **Pending re-ratification** |
-| Ratified by | — (program lead) |
-| Ratifies, when accepted | `NONO_v0.4.4.md` and `POPEYE_v0.4.4.md`, jointly |
+| Status | **Re-ratified 2026-11-10** |
+| Ratified by | Oscar Mack, program lead (architecture and risk decisions) |
+| Reviewed by | popeye and nono owners (approved, fiskroad PR #7) |
+| Residual risk accepted | A compromised sit-cip or Nexus could misuse a live key within its TTL, limited to reads its policy permits and ended early by task close |
+| Closes | `POPEYE_v0.4.1` §5 O3 (registry location), listed under this record's "Not ratified here" |
+| Ratifies | `NONO_v0.4.4.md` and `POPEYE_v0.4.4.md`, jointly |

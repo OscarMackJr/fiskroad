@@ -57,5 +57,5 @@ Task-based access needs a carrier for "this request belongs to task X of type Y"
 | Ratified by | Oscar Mack, program lead (architecture and risk decisions) |
 | Session | Access-control decisions session, 2026-11-10. Recommendation accepted as written. |
 | Closes | `POPEYE_v0.4.1` §5 O3 (registry location) |
-| Not ratified here | The popeye amendment text (§4 follow-up) |
+| Follow-up ratified | `POPEYE_v0.4.4.md` (the §4 popeye amendment), with `NONO_v0.4.4.md`, via `DECISION_agent-key-service-scope` Revision 2, 2026-11-10 |
 | Change control | Moving the binding off the agent key, or adding capabilities to it, requires a new decision record |

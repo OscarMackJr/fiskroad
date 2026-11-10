@@ -1,7 +1,7 @@
 # Popeye v0.4.4 — Task Binding, Agent Registry, and sit-cip / Nexus Introspection
 
 Version: 0.4.4
-Status: **Proposed 2026-11-10. Not ratified.** It ratifies jointly with `NONO_v0.4.4.md` (one seam) through the re-ratification of `DECISION_agent-key-service-scope.md` (proposed Revision 2), which that record's change-control clause requires. It implements decisions D-3 (`DECISION_task-binding-on-agent-key.md`) and D-4 (`DECISION_agent-key-sitcip-nexus-reads.md`), both ratified 2026-11-10.
+Status: **Ratified 2026-11-10**, jointly with `NONO_v0.4.4.md` (one seam), via `DECISION_agent-key-service-scope.md` Revision 2. It implements decisions D-3 (`DECISION_task-binding-on-agent-key.md`) and D-4 (`DECISION_agent-key-sitcip-nexus-reads.md`). See the Ratification Record at the end.
 Repository: popeye (`specs/`)
 Amends:
 - `POPEYE_v0.4.1.md` §2.1 (exchange request and response), §2.2 (issuance rules), §2.3 (ledger), §2.4 (revocation) and §5 O3 (closed);
@@ -9,7 +9,7 @@ Amends:
 
 Adds REQ-AGT-22 to -30.
 Audience: popeye maintainer; nono, sit-cip, Nexus, hometown and olive owners.
-Primary post-read action: review with the nono owner alongside `NONO_v0.4.4.md`, then take both to re-ratification.
+Primary post-read action: implement; the requirements in this amendment are the acceptance criteria.
 
 ---
 
@@ -126,8 +126,9 @@ The task binding narrows exposure further: closing a task ends every key bound t
 
 | Field | Value |
 |---|---|
-| Decision | **Pending.** Proposed for joint ratification with `NONO_v0.4.4.md` |
-| Date | — |
-| Ratified by | — (program lead, via re-ratification of `DECISION_agent-key-service-scope.md`) |
+| Decision | **Ratified**, jointly with `NONO_v0.4.4.md` as one seam |
+| Date | 2026-11-10 |
+| Ratified by | Oscar Mack, program lead (architecture and risk decisions), via re-ratification of `DECISION_agent-key-service-scope.md` Revision 2 |
+| Reviewed by | popeye and nono owners (approved, fiskroad PR #7) |
 | Implements | `DECISION_task-binding-on-agent-key.md` (D-3) and `DECISION_agent-key-sitcip-nexus-reads.md` (D-4), ratified 2026-11-10 |
-| Change control | On ratification, any change requires a matching change to `NONO_v0.4.4.md` and re-ratification of `DECISION_agent-key-service-scope.md` |
+| Change control | Any change requires a matching change to `NONO_v0.4.4.md` and re-ratification of `DECISION_agent-key-service-scope.md` |
