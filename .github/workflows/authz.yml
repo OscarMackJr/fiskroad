@@ -1,0 +1,29 @@
+name: authz-contract
+
+on:
+  pull_request:
+    paths:
+      - "contracts/authz/**"
+      - "contracts/vocabulary.yaml"
+      - "tools/authz_check.py"
+      - ".github/workflows/authz.yml"
+  push:
+    branches: [main]
+    paths:
+      - "contracts/authz/**"
+      - "contracts/vocabulary.yaml"
+      - "tools/authz_check.py"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install cedarpy==4.12.2 pyyaml==6.0.2
+      - run: python tools/authz_check.py

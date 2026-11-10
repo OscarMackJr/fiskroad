@@ -1,0 +1,98 @@
+// Fiskroad shared authorization schema (Cedar).
+// Owning spec: specs/FISKROAD_ACCESS_CONTROL_RBAC_TBAC_v0.1.md §4.3
+// Ratified by: specs/decisions/DECISION_policy-engine-cedar.md (D-1)
+//
+// Principals carry identity only. What a role, an agent grant or a task
+// type may do lives in policies/, never in tokens.
+namespace Fiskroad {
+
+  // ---- Principals -------------------------------------------------------
+
+  // An Entra app role (human) or an agent grant from popeye's agent
+  // registry. Catalogue: contracts/authz/roles.yaml.
+  entity Role;
+
+  // A human. tenants holds lowercase canonical tenant UUIDs
+  // (vocabulary §1.1); "*" is the sit-cip all-tenant admin wildcard.
+  // teams holds Nexus team ids.
+  entity User in [Role] {
+    tenants: Set<String>,
+    teams: Set<String>,
+  };
+
+  // An agent principal (vocabulary §3). Effective permission is the
+  // intersection of its own grants (its Role parents) and on_behalf_of's
+  // roles; onward delegation is refused, so on_behalf_of is always a User.
+  entity Agent in [Role] {
+    agent_id: String,
+    on_behalf_of: User,
+  };
+
+  // A workload acting for a user through an approved proposal, e.g. the
+  // olive executor (decision D-4: cross-system writes go through olive).
+  entity Application in [Role];
+
+  // ---- Resources --------------------------------------------------------
+
+  // Any tenant-scoped sit-cip record (search hit, source, thread, ticket).
+  entity SitcipRecord {
+    tenant_id: String,
+    data_class: String,
+  };
+
+  // A Nexus deal. tenant_id is the Nexus org mapped to a program tenant.
+  entity NexusDeal {
+    tenant_id: String,
+    team_id: String,
+    owner: User,
+    is_private: Bool,
+    data_class: String,
+  };
+
+  // A nono runtime capability request. kind: fs_read | fs_write | net_egress.
+  entity NonoCapability {
+    kind: String,
+    data_class: String,
+  };
+
+  // A nono fleet policy profile (HKLM / %ProgramData% / Intune).
+  entity NonoProfile;
+
+  // ---- Request context --------------------------------------------------
+
+  // The task binding carried on the popeye agent key (decision D-3).
+  // Expiry and revocation are enforced by popeye introspection before a
+  // request reaches policy; an expired or revoked binding never arrives.
+  type TaskBinding = {
+    task_id: String,
+    task_type: String,
+  };
+
+  type RequestContext = {
+    task?: TaskBinding,
+    acting_for?: User,
+  };
+
+  // ---- Actions: sit-cip -------------------------------------------------
+
+  action "sitcip.search", "sitcip.read", "sitcip.ai_assist"
+    appliesTo { principal: [User, Agent], resource: [SitcipRecord], context: RequestContext };
+  action "sitcip.ingest", "sitcip.map_reference", "sitcip.export_thread", "sitcip.admin"
+    appliesTo { principal: [User, Agent], resource: [SitcipRecord], context: RequestContext };
+
+  // ---- Actions: Nexus ---------------------------------------------------
+
+  action "nexus.deal.read"
+    appliesTo { principal: [User, Agent], resource: [NexusDeal], context: RequestContext };
+  action "nexus.deal.update"
+    appliesTo { principal: [User, Agent, Application], resource: [NexusDeal], context: RequestContext };
+  action "nexus.deal.delete"
+    appliesTo { principal: [User, Agent], resource: [NexusDeal], context: RequestContext };
+
+  // ---- Actions: nono ----------------------------------------------------
+
+  action "nono.capability.request", "nono.override.approve"
+    appliesTo { principal: [User, Agent], resource: [NonoCapability], context: RequestContext };
+  action "nono.profile.author"
+    appliesTo { principal: [User, Agent], resource: [NonoProfile], context: RequestContext };
+}

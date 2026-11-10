@@ -1,5 +1,7 @@
 # Program Shared Vocabulary v0.4
 
+> **Superseded 2026-11-10 by `PROGRAM_SHARED_VOCABULARY_v0.5.md`**, which carries §1–§4 forward unchanged and adds tasks. `contracts/vocabulary.yaml` is now v0.5.
+
 Version: 0.4
 Status: **Reconstructed 2026-10-19 from the August 2026 design session.** The original v0.4 document was delivered as a download in that session (inside `olive-agent-inputs.zip`). This reconstruction is faithful to `vocabulary.yaml` v0.4 and to the surviving prose, but its REQ/TC tables are rebuilt, not recovered. Replace with the original if found.
 Repository: fiskroad, `specs/`. Machine-readable form: `contracts/vocabulary.yaml` (v0.4, SHA-256 `60a44f00db0daafcad3a4e11fe8fcbb2821e1ca7879302bae413b212a0c1e8e7`, LF line endings).

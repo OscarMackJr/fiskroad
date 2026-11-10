@@ -69,6 +69,19 @@ Project positions in one line each:
   without an image pipeline. Consequence recorded: the rendered YAML
   lands in Terraform state, acceptable only because it carries routing
   metadata and no credentials.
+- Access control (ratified 2026-11-10, `FISKROAD_ACCESS_CONTROL_RBAC_TBAC_v0.1`
+  §9):
+  - RBAC is Entra ID app roles, with PIM for privileged roles.
+  - TBAC is a task binding on the popeye agent key (identity, not capability).
+  - Cedar is the program policy engine: embedded in each system, with one
+    shared policy set in `contracts/authz/` (ends the §3C deferral).
+  - Vocabulary v0.5 adds tasks.
+  - The agent key reaches sit-cip and Nexus for reads only; writes go
+    through olive.
+  - Entra is Nexus's identity provider.
+  - Decision records are `specs/decisions/DECISION_{policy-engine-cedar,
+    task-vocabulary, task-binding-on-agent-key, agent-key-sitcip-nexus-reads,
+    nexus-identity-provider-entra, entra-group-naming}.md`.
 
 ## Program Decisions Open
 
